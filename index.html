@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praktikum 7 - Rommy Julyan</title>
+    <style>
+        body {
+            background-color: rgb(198, 212, 164);
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        .dark-mode {
+            background-color: rgb(2, 6, 58);
+            color: white;
+        }
+
+        .logo {
+            width: 300px;
+            height: auto;
+            text-align: center;
+        }
+
+        .output{
+            font-family: sans-serif;
+        }
+
+        .tittle{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: xx-large;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <nav>
+            <h1 class="tittle">PRAKTIKUM 7</h1>
+            <img class="logo" src="logo.png">
+        </nav>
+        <nav>
+            <select name="provinsi" id="provinsi" onchange="outputProv(this.value)">
+                <option selected disabled>Pilih Provinsi</option>
+                <option value= "Banten">Banten</option>
+                <option value= "SumateraUtara">Sumatera Utara</option>
+                <option value= "JawaBarat">Jawa Barat</option>
+                <option value= "JawaTimur">Jawa Timur</option>
+            </select> 
+
+            <select name="kota" onchange="kotakota()" id="kota">
+                <option selected disabled>Pilih Kota</option>
+                <option value="" disabled>-</option>
+            </select><br>
+            <div>
+                <br><button onclick="output()" class="output">Submit</button>   
+                <p id="output"></p>
+            </div>
+            <button onclick="darkmode()" id="darkmode">Dark Mode</button><br>
+        </nav>
+    </div>
+
+    <script>
+        function darkmode(){
+            var body = document.body;
+            var content = document.getElementById('darkmode');
+            if(body.classList == 'dark-mode'){
+                body.classList = 'body';
+            }
+            else{
+                body.classList = 'dark-mode';
+            }
+        }
+
+        var arrKota  = {
+            Banten : ["Tangerang", "Balaraja", "Pandeglang", "Curug", "Serang"],
+            SumateraUtara : ["Medan", "Binjai", "Sibolga", "GunungSitoli", "Tarutung"],
+            JawaBarat : ["Bandung", "Depok", "Bekasi", "Subang ", "Cianjur"],
+            JawaTimur : ["Surabaya", "Batu", "Kediri", "Malang", "Blitar"],
+        }
+
+        function outputProv(value){
+            if(value.length==0) {
+                document.getElementById("kota").innerHTML = "<option></option>";
+            }
+            else {
+                var pilihKota = "";
+                for(listKota in arrKota[value]) {
+                    pilihKota+="<option>" + arrKota[value][listKota] + "</option>";
+                }
+                document.getElementById("kota").innerHTML = pilihKota;
+            }
+    }
+
+    function output(){
+        var provinsiVal = document.getElementById("provinsi").value;
+        var kotaVal = document.getElementById("kota").value;
+        var outputVal = document.getElementById("output");
+        outputVal.innerText = "Pada Provinsi " + provinsiVal + " terdapat Kota " + kotaVal;
+    }
+    </script>
+</body>
+</html>
